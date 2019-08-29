@@ -12,7 +12,6 @@ freebsd_install_delay: 5
 
 poudriere_packages:
   - "ports-mgmt/poudriere"
-  - "ports-mgmt/portmaster"
   - "devel/ccache"
 poudriere_packages_cert:
   - "security/py-openssl"
