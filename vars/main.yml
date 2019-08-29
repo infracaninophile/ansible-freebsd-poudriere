@@ -1,7 +1,6 @@
 ---
 # vars for freebsd-poudriere
 
-# freebsd_install_method: "ports"
 # freebsd_use_packages: "yes"
 
 # poudriere_cert_CN: "builder.example.com"
@@ -33,7 +32,6 @@
 #      - devel/git
 #      - archivers/gtar
 #      - ports-mgmt/pkg
-#      - ports-mgmt/portmaster
 #      - ports-mgmt/portupgrade
 #      - security/py-certbot
 #      - net/rsync

@@ -1,7 +1,6 @@
 ---
 
 - name: "packages: Install poudriere packages"
-  when: freebsd_install_method == "packages"
   pkgng:
     name: "{{ poudriere_packages }}"
   register: result
@@ -9,32 +8,10 @@
   until: result is succeeded
   delay: "{{ freebsd_install_delay }}"
 
-- name: "packages: Install poudriere ports"
-  when: freebsd_install_method == "ports"
-  portinstall:
-    name: "{{ item }}"
-    use_packages: "{{ freebsd_use_packages }}"
-  loop: "{{ poudriere_packages }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
-
 - name: "packages: Install packages to create certificate"
-  when: poudriere_cert_create and freebsd_install_method == "packages"
+  when: poudriere_cert_create
   pkgng:
     name: "{{ poudriere_packages_cert }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
-
-- name: "packages: Install ports to create certificate"
-  when: poudriere_cert_create and freebsd_install_method == "ports"
-  portinstall:
-    name: "{{ item }}"
-    use_packages: "{{ freebsd_use_packages }}"
-  loop: "{{ poudriere_packages_cert }}"
   register: result
   retries: "{{ freebsd_install_retries }}"
   until: result is succeeded
