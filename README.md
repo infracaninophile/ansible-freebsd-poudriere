@@ -101,7 +101,6 @@ Clients
 
 2) Alternatively set *freebsd_use_packages:yes* and install the packages with [Ansible role freebsd_ports](https://galaxy.ansible.com/vbotka/freebsd_ports/) (with Ansible module portinstall).
 
-
 References
 ----------
 

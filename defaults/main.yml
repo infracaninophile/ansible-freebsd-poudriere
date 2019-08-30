@@ -4,7 +4,6 @@
 poudriere_debug: False
 poudriere_backup_conf: yes
 
-freebsd_use_packages: "yes"
 freebsd_install_retries: 10
 freebsd_install_delay: 5
 

@@ -10,7 +10,6 @@
          ansible_distribution_version [ {{ ansible_distribution_version }} ]
          ansible_distribution_release [ {{ ansible_distribution_release }} ]
 
-         freebsd_use_packages [ {{ freebsd_use_packages }} ]
          poudriere_packages [
          {{ poudriere_packages | to_nice_yaml }} ]
          poudriere_packages_cert [
