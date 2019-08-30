@@ -27,7 +27,7 @@
          poudriere_cert_create [ {{ poudriere_cert_create }} ]
          poudriere_cert_CN [ {{ poudriere_cert_CN }} ]
          poudriere_cert_path [ {{ poudriere_cert_path }} ]
-         poudriere_conf [ {{ poudriere_conf }} ]
+         poudriere_conf_file [ {{ poudriere_conf_file }} ]
          poudriere_conf_dir [ {{ poudriere_conf_dir }} ]
          poudriere_conf_NO_ZFS [ {{ poudriere_conf_NO_ZFS }} ]
          poudriere_conf_ZROOTFS [ {{ poudriere_conf_ZROOTFS }} ]

@@ -1,9 +1,9 @@
 ---
 
-- name: "conf: Configure {{ poudriere_conf }}"
+- name: "conf: Configure {{ poudriere_conf_file }}"
   template:
     src: "poudriere.conf.j2"
-    dest: "{{ poudriere_conf }}"
+    dest: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"

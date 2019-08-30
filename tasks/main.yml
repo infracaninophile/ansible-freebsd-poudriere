@@ -12,7 +12,7 @@
   tags: poudriere_cert
 
 - import_tasks: conf.yml
-  tags: poudriere_conf
+  tags: poudriere_config
 
 - import_tasks: make.yml
   tags: poudriere_make
