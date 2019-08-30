@@ -4,9 +4,9 @@
 # freebsd_use_packages: "yes"
 
 # poudriere_cert_CN: "builder.example.com"
-# poudriere_conf_NO_ZFS: "no"
+# poudriere_conf.NO_ZFS: "no"
 # DO image=freebsd-11-1-x64-zfs; size=8gb
-# poudriere_conf_ZPOOL: "zroot"
+# poudriere_conf.ZPOOL: "zroot"
 
 # poudriere_make_conf:
 #  - "OPTIONS_UNSET+= DOCS NLS X11 EXAMPLES"
