@@ -3,19 +3,11 @@
 - name: "packages: Install poudriere packages"
   pkgng:
     name: "{{ poudriere_packages }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
 
 - name: "packages: Install packages to create certificate"
   when: poudriere_cert_create
   pkgng:
     name: "{{ poudriere_packages_cert }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
 
 # EOF
 ...

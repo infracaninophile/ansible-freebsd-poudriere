@@ -3,9 +3,7 @@
 
 poudriere_debug: False
 poudriere_backup_conf: yes
-
-freebsd_install_retries: 10
-freebsd_install_delay: 5
+poudriere_use_zfs: yes
 
 poudriere_packages:
   - ports-mgmt/poudriere
