@@ -40,7 +40,7 @@ poudriere_conf:
   FREEBSD_HOST: "https://download.freebsd.org"
   RESOLV_CONF: "/etc/resolv.conf"
   BASEFS: "/usr/local/poudriere"
-  POUDRIERE_DATA: "{{ poudriere_conf_BASEFS }}/data"
+  POUDRIERE_DATA: "{{ poudriere_conf['BASEFS'] }}/data"
   USE_PORTLINT: "yes"
   USE_TMPFS: "yes"
   DISTFILES_CACHE: "/usr/ports/distfiles"

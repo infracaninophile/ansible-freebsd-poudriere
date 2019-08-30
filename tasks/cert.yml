@@ -38,7 +38,7 @@
 - name: "cert: Generate an OpenSSL private key (default 4096 bits, RSA)"
   when: poudriere_cert_create and not ansible_check_mode
   openssl_privatekey:
-    path: "{{ poudriere_conf_PKG_REPO_SIGNING_KEY }}"
+    path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_ssl_private_key_mode }}"
@@ -48,7 +48,7 @@
   when: poudriere_cert_create and not ansible_check_mode
   openssl_csr:
     path: "{{ poudriere_ssl_dir }}/csr/poudriere.csr"
-    privatekey_path: "{{ poudriere_conf_PKG_REPO_SIGNING_KEY }}"
+    privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     common_name: "{{ poudriere_cert_CN }}"
   tags: poudriere_crt
 
@@ -56,7 +56,7 @@
   when: poudriere_cert_create and not ansible_check_mode
   openssl_certificate:
     path: "{{ poudriere_cert_path }}"
-    privatekey_path: "{{ poudriere_conf_PKG_REPO_SIGNING_KEY }}"
+    privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     csr_path: "{{ poudriere_ssl_dir }}/csr/poudriere.csr"
     provider: selfsigned
   tags: poudriere_crt
