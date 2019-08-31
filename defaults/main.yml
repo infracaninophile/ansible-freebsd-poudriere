@@ -33,7 +33,7 @@ poudriere_basefs: /usr/local/poudriere
 
 poudriere_conf:
   ZPOOL: zroot
-  NO_ZFS: "no"
+  NO_ZFS: '{{ poudriere_use_zfs|ternary("yes", "no") }}'
   ZROOTFS: /poudriere
   FREEBSD_HOST: https://download.freebsd.org
   RESOLV_CONF: /etc/resolv.conf
@@ -57,6 +57,13 @@ poudriere_pkglist_dir: "{{ poudriere_conf_dir }}/pkglist"
 poudriere_pkg_arch: []
 pkg_dict: []
 
+poudriere_zfs:
+  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}": {}
+  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/jails": {}
+  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/ports": {}
+  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/data":
+    mountpoint: /usr/local/poudriere/data
+    'poudriere:type': data
 
 # EOF
 ...

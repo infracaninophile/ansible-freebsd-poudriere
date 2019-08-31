@@ -17,5 +17,9 @@
 - import_tasks: make.yml
   tags: poudriere_make
 
+- import_tasks: zfs.yml
+  when: poudriere_use_zfs
+  tags: poudriere_zfs
+
 # EOF
 ...
