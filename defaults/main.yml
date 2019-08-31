@@ -58,10 +58,10 @@ poudriere_pkg_arch: []
 pkg_dict: []
 
 poudriere_zfs:
-  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}": {}
-  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/jails": {}
-  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/ports": {}
-  "{{ poudriere_conf['ZPOOL'] }}/{{ poudriere_conf['ZROOTFS'] }}/data":
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}": {}
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/jails": {}
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/ports": {}
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/data":
     mountpoint: /usr/local/poudriere/data
     'poudriere:type': data
 
