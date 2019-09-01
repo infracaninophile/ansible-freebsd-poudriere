@@ -5,11 +5,9 @@
   args:
     executable: /bin/sh
   ignore_errors: true
+  check_mode: no
   changed_when: false
   register: ports_trees
-
-- debug:
-    var: ports_trees
   
 - name: Set up ports tree(s) for poudriere
   when: item.name not in ports_trees.stdout_lines

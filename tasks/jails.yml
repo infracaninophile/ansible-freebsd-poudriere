@@ -6,6 +6,7 @@
     executable: /bin/sh
   ignore_errors: true
   changed_when: false
+  check_mode: no
   register: jails
 
 - name: Set up jail(s) for poudriere
