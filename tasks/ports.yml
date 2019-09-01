@@ -12,9 +12,9 @@
   when: item.name not in ports_trees.stdout_lines
   command: >
     poudriere ports -c  -p {{ item.name }} -m {{ item.method }}
-    {{ item.mountpoint|default(false)|ternary("-M " ~ item.mountpoint, "") }}
-    {{ item.branch|default(false)|ternary("-B " ~ item.branch) }}
-    {{ item.fs|default(false)|ternary("-f" ~ item.fs, "") }}
+    {{ item.mountpoint|default(omit)|ternary("-M " ~ item.mountpoint, "") }}
+    {{ item.branch|default(omit)|ternary("-B " ~ item.branch) }}
+    {{ item.fs|default(omit)|ternary("-f" ~ item.fs, "") }}
   loop: '{{ poudriere_ports }}'
 
 ...
