@@ -9,7 +9,7 @@
   register: ports_trees
 
 - name: Set up ports tree(s) for poudriere
-  when: item.name not in ports_trees.stdout_lines  
+  when: item.name not in ports_trees.stdout_lines
   command: poudriere ports -c  -p {{ item.name }} -m {{ item.method }} {{ item.mountpoint|default(false)|ternary("-M " ~ item.mountpoint, "") }} {{ item.branch|default(false)|ternary("-B " ~ item.branch) }} {{ item.fs|default(false)|ternary("-f" ~ item.fs, "") }}
   loop: '{{ poudriere_ports }}'
 
