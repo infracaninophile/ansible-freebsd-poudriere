@@ -2,6 +2,7 @@
 
 - name: Find existing jails
   shell: 'poudriere jail -l -q | cut -f 1 -w'
+  args:
     executable: /bin/sh
   ignore_errors: true
   changed_when: false
