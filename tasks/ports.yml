@@ -2,6 +2,7 @@
 
 - name: Find existing ports trees
   shell: 'poudriere ports -l -q | cut -f 1 -w 2>/dev/null'
+  args:
     executable: /bin/sh
   ignore_errors: true
   changed_when: false
