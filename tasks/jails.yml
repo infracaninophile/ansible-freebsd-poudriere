@@ -13,5 +13,6 @@
   command: >
     poudriere jail -c -j {{ item.name }} -m {{ item.method }}
     -f {{ item.fs }} -a {{ item.arch }} -v {{ item.version }}
-
+  loop: '{{ poudriere_jails }}'
+    
 ...
