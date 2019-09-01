@@ -21,5 +21,11 @@
   when: poudriere_use_zfs
   tags: poudriere_zfs
 
+- import_tasks: ports.yml
+  tags: poudriere_ports
+
+- import_tasks: jails.yml
+  tags: poudriere_jails
+
 # EOF
 ...

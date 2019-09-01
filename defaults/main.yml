@@ -65,5 +65,9 @@ poudriere_zfs:
     mountpoint: /usr/local/poudriere/data
     'poudriere:type': data
 
+poudriere_ports: []
+
+poudriere_jails: []
+
 # EOF
 ...

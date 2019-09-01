@@ -1,0 +1,14 @@
+---
+
+- name: Find existing jails
+  shell: 'poudriere jail -l -q | cut -f 1 -w'
+    executable: /bin/sh
+  ignore_errors: true
+  changed_when: false
+  register: jails
+
+- name: Set up jail(s) for poudriere
+  when: item.name not in jails.stdout_lines
+  command: poudriere jail -c -j {{ item.name }} -m {{ item.method }} -f {{ item.fs }} -a {{ item.arch }} -v {{ item.version }}  
+  
+...

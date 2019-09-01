@@ -1,0 +1,15 @@
+---
+
+- name: Find existing ports trees
+  shell: 'poudriere ports -l -q | cut -f 1 -w 2>/dev/null'
+    executable: /bin/sh
+  ignore_errors: true
+  changed_when: false
+  register: ports_trees
+
+- name: Set up ports tree(s) for poudriere
+  when: item.name not in ports_trees.stdout_lines  
+  command: poudriere ports -c  -p {{ item.name }} -f {{ item.fs }} -m {{ item.method }} {{ item.mountpoint|default(false)|ternary("-M " ~ item.mountpoint, "") }} {{ item.branch|default(false)|ternary("-B " ~ item.branch) }}
+  loop: '{{ poudriere_ports }}'
+
+...
