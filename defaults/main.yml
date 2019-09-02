@@ -53,7 +53,7 @@ poudriere_conf:
   CCACHE_DIR_NON_ROOT_SAFE: yes
   URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/"
 
-poudiere_ccache_conf:
+poudriere_ccache_conf:
   max_size: 8G
 
 # {{ poudriere_conf_dir }}/make.conf
