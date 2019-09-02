@@ -4,6 +4,8 @@
 poudriere_debug: False
 poudriere_backup_conf: yes
 poudriere_use_zfs: yes
+poudriere_ccache_user: nobody
+poudriere_ccache_group: wheel
 
 poudriere_packages:
   - ports-mgmt/poudriere
@@ -47,8 +49,12 @@ poudriere_conf:
   CHECK_CHANGED_DEPS: "yes"
   PKG_REPO_SIGNING_KEY: "{{ poudriere_ssl_dir }}/private/poudriere.pem"
   CCACHE_DIR: /var/cache/ccache
+  BUILD_AS_NON_ROOT: yes
+  CCACHE_DIR_NON_ROOT_SAFE: yes
   URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/"
 
+poudiere_ccache_conf:
+  max_size: 8G
 
 # {{ poudriere_conf_dir }}/make.conf
 poudriere_make_conf: []

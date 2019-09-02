@@ -1,0 +1,44 @@
+---
+
+- name: Create {{ poudriere_conf.CCACHE_DIR }}
+  file:
+    name: '{{ poudriere_conf.CCACHE_DIR }}'
+    state: directory
+    owner: root
+    group: wheel
+    mode: 0755
+
+- name: Create subdirectories of {{ poudriere_conf.CCACHE_DIR }}
+  file:
+    name: '{{ poudriere_conf.CCACHE_DIR }}/{{ item }}'
+    state: directory
+    owner: '{{ poudriere_ccache_user }}'
+    group: '{{ poudriere_ccache_group }}'
+    mode: 0755
+  loop:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - a
+    - b
+    - c
+    - d
+    - e
+    - f
+
+- name: Create ccache.conf
+  template:
+    source: ccache.conf.j2
+    dest: '{{ poudriere_conf.CCACHE_DIR }}/ccache.conf'
+    owner: root
+    group: wheel
+    mode: 0644
+    
+...

@@ -21,6 +21,9 @@
   when: poudriere_use_zfs
   tags: poudriere_zfs
 
+- import_tasks: ccache.yml
+  tags: poudriere_ccache
+  
 - import_tasks: ports.yml
   tags: poudriere_ports
 
