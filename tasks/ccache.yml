@@ -32,6 +32,7 @@
     - d
     - e
     - f
+    - tmp
 
 - name: Create ccache.conf
   template:
