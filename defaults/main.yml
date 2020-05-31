@@ -8,11 +8,11 @@ poudriere_ccache_user: nobody
 poudriere_ccache_group: wheel
 
 poudriere_packages:
-  - ports-mgmt/poudriere
-  - devel/ccache
+  - poudriere
+  - ccache
+  - git
 poudriere_packages_cert:
-  - security/py-openssl
-  - security/py-acme-tiny
+  - py37-openssl
 
 # owner, group, mode
 poudriere_owner: root
@@ -60,15 +60,31 @@ poudriere_ccache_conf:
 poudriere_make_conf: []
 
 poudriere_pkglist_dir: "{{ poudriere_conf_dir }}/pkglist"
-poudriere_pkg_arch: []
-pkg_dict: []
+poudriere_pkg_arch:
+  - amd64
+pkg_dict_amd64:
+  - pkglist: packages
+    packages:
+      - security/ca_root_nss
+      - devel/ccache
+      - devel/git
+      - www/nginx
+      - security/pam_ssh_agent_auth
+      - ports-mgmt/pkg
+      - ports-mgmt/poudriere
+      - security/py-openssl
+      - lang/python
+      - security/sudo
 
 poudriere_zfs:
-  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}": {}
-  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/jails": {}
-  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/ports": {}
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}":
+    mountpoint: '{{ poudriere_basefs }}'
+    'poudriere:type': root
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/jails":
+    'poudriere:type': jails
+  "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/ports":
+    'poudriere:type': jails
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/data":
-    mountpoint: /usr/local/poudriere/data
     'poudriere:type': data
 
 poudriere_ports: []
