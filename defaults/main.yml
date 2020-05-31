@@ -27,6 +27,7 @@ poudriere_ssl_private_dir_mode: 0700
 poudriere_ssl_private_key_mode: 0600
 poudriere_cert_CN: "{{ ansible_fqdn }}"
 poudriere_cert_path: "{{ poudriere_ssl_dir }}/crt/poudriere.crt"
+poudriere_pubkey_path: "{{ poudriere_ssl_dir }}/public/poudriere.public.pem"
 
 # poudriere.conf (see /usr/local/etc/poudriere.conf.sample)
 poudriere_conf_file: /usr/local/etc/poudriere.conf

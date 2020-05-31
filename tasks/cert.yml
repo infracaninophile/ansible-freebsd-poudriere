@@ -26,6 +26,15 @@
     mode: "{{ poudriere_ssl_dir_mode }}"
   tags: poudriere_ssl_dirs
 
+- name: "cert: Create {{ poudriere_ssl_dir }}/public"
+  file:
+    state: directory
+    path: "{{ poudriere_ssl_dir }}/public"
+    owner: "{{ poudriere_owner }}"
+    group: "{{ poudriere_group }}"
+    mode: "{{ poudriere_ssl_dir_mode }}"
+  tags: poudriere_ssl_dirs
+
 - name: "cert: Create {{ poudriere_ssl_dir }}/private"
   file:
     state: directory
@@ -43,6 +52,26 @@
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_ssl_private_key_mode }}"
   tags: poudriere_crt
+
+- name: "cert: Generate an OpenSSL public key"
+  when: poudriere_cert_create and not ansible_check_mode
+  openssl_publickey:
+    path: "{{ poudriere_pubkey_path }}"
+    privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
+  tags: poudriere_pubkey
+
+- name: "cert: Register contents of {{ poudriere_pubkey_path }}"
+  when: poudriere_cert_create and not ansible_check_mode
+  command: "cat {{ poudriere_pubkey_path }}"
+  register: pubkey
+  tags: poudriere_pubkey
+
+- name: "cert: Set a fact containing the OpenSSL public key"
+  when: poudriere_cert_create and not ansible_check_mode
+  set_fact:
+    poudriere_pubkey: "{{ pubkey.stdout }}"
+    cacheable: yes
+  tags: poudriere_pubkey
 
 - name: "cert: Generate an OpenSSL Certificate Signing Request"
   when: poudriere_cert_create and not ansible_check_mode
