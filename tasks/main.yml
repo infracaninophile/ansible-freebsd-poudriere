@@ -21,7 +21,7 @@
   when: poudriere_use_zfs
   tags: poudriere_zfs
 
-- import tasks: ufs.yml
+- import_tasks: ufs.yml
   when: not poudriere_use_zfs
   tags: poudriere_ufs
 
