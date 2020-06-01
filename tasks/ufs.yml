@@ -1,9 +1,11 @@
 ---
 
 - name: Create directories used by poudriere
+  when: not poudriere_use_zfs | bool
   file:
     dest: '{{ item }}'
     state: directory
   loop: '{{ poudriere_ufs }}'
+  tags: poudriere_ufs
 
 ...
