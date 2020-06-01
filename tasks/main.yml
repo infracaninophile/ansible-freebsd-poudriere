@@ -21,6 +21,10 @@
   when: poudriere_use_zfs
   tags: poudriere_zfs
 
+- import tasks: ufs.yml
+  when: not poudriere_use_zfs
+  tags: poudriere_ufs
+
 - import_tasks: ccache.yml
   tags: poudriere_ccache
 

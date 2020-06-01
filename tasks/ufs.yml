@@ -1,0 +1,9 @@
+---
+
+- name: Create directories used by poudriere
+  file:
+    dest: '{{ item }}'
+    state: directory
+  loop: '{{ poudriere_ufs }}'
+
+...

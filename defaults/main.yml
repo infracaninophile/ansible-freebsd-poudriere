@@ -88,6 +88,12 @@ poudriere_zfs:
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/data":
     'poudriere:type': data
 
+poudriere_ufs:
+  - '{{ poudriere_basefs }}'
+  - '{{ poudriere_basefs }}/jails'
+  - '{{ poudriere_basefs }}/ports'
+  - '{{ poudriere_basefs }}/data'
+
 poudriere_ports: []
 
 poudriere_jails: []
