@@ -4,6 +4,7 @@
   when: not poudriere_use_zfs | bool
   file:
     dest: '{{ item }}'
+    mode: 0755
     state: directory
   loop: '{{ poudriere_ufs }}'
   tags: poudriere_ufs
