@@ -64,7 +64,7 @@
 - name: "cert: Register contents of {{ poudriere_pubkey_path }}"
   when: poudriere_cert_create and not ansible_check_mode
   command: "cat {{ poudriere_pubkey_path }}"
-  register: pubkey
+  register: poudriere_pubkey
   tags: poudriere_pubkey
 
 - name: "cert: Set a fact containing the OpenSSL public key"
