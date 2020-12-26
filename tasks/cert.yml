@@ -70,7 +70,7 @@
 - name: "cert: Set a fact containing the OpenSSL public key"
   when: poudriere_cert_create and not ansible_check_mode
   set_fact:
-    poudriere_pubkey: "{{ pubkey.stdout }}"
+    poudriere_pubkey: "{{ poudriere_pubkey.stdout }}"
     cacheable: yes
   tags: poudriere_pubkey
 
