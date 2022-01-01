@@ -5,7 +5,7 @@
   args:
     executable: /bin/sh
   ignore_errors: true
-  check_mode: no
+  check_mode: false
   changed_when: false
   register: ports_trees
 

@@ -1,9 +1,9 @@
 ---
 # defaults freebsd-poudriere
 
-poudriere_debug: False
-poudriere_backup_conf: yes
-poudriere_use_zfs: yes
+poudriere_debug: false
+poudriere_backup_conf: true
+poudriere_use_zfs: true
 poudriere_ccache_user: nobody
 poudriere_ccache_group: wheel
 
@@ -20,12 +20,12 @@ poudriere_group: wheel
 poudriere_mode: 0644
 poudriere_mode_dir: 0755
 # ssl
-poudriere_cert_create: True
+poudriere_cert_create: true
 poudriere_ssl_dir: /usr/local/etc/ssl
 poudriere_ssl_dir_mode: 0755
 poudriere_ssl_private_dir_mode: 0700
 poudriere_ssl_private_key_mode: 0600
-poudriere_cert_CN: "{{ ansible_fqdn }}"
+poudriere_cert_cn: "{{ ansible_fqdn }}"
 poudriere_cert_path: "{{ poudriere_ssl_dir }}/crt/poudriere.crt"
 poudriere_pubkey_path: "{{ poudriere_ssl_dir }}/public/poudriere.public.pem"
 
@@ -50,8 +50,8 @@ poudriere_conf:
   CHECK_CHANGED_DEPS: "yes"
   PKG_REPO_SIGNING_KEY: "{{ poudriere_ssl_dir }}/private/poudriere.pem"
   CCACHE_DIR: /var/cache/ccache
-  BUILD_AS_NON_ROOT: yes
-  CCACHE_DIR_NON_ROOT_SAFE: yes
+  BUILD_AS_NON_ROOT: true
+  CCACHE_DIR_NON_ROOT_SAFE: true
   URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/"
 
 poudriere_ccache_conf:

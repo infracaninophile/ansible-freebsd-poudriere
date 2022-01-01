@@ -71,7 +71,7 @@
   when: poudriere_cert_create and not ansible_check_mode
   set_fact:
     poudriere_pubkey: "{{ poudriere_pubkey.stdout }}"
-    cacheable: yes
+    cacheable: true
   tags: poudriere_pubkey
 
 - name: "cert: Generate an OpenSSL Certificate Signing Request"
@@ -79,7 +79,7 @@
   openssl_csr:
     path: "{{ poudriere_ssl_dir }}/csr/poudriere.csr"
     privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
-    common_name: "{{ poudriere_cert_CN }}"
+    common_name: "{{ poudriere_cert_cn }}"
   tags: poudriere_crt
 
 - name: "cert: Generate a Self Signed OpenSSL certificate"

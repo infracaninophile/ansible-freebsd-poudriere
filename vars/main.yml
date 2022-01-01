@@ -1,7 +1,7 @@
 ---
 # vars for freebsd-poudriere
 
-# poudriere_cert_CN: "builder.example.com"
+# poudriere_cert_cn: "builder.example.com"
 # poudriere_conf.NO_ZFS: "no"
 # DO image=freebsd-11-1-x64-zfs; size=8gb
 # poudriere_conf.ZPOOL: "zroot"
