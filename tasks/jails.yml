@@ -1,7 +1,7 @@
 ---
 
 - name: Find existing jails
-  shell: 'poudriere jail -l -q | cut -f 1 -w'
+  ansible.builtin.shell: 'poudriere jail -l -q | cut -f 1 -w'
   args:
     executable: /bin/sh
   ignore_errors: true
@@ -11,7 +11,7 @@
 
 - name: Set up jail(s) for poudriere
   when: item.name not in jails.stdout_lines
-  command: >
+  ansible.builtin.command: >
     poudriere jail -c -j {{ item.name }} -m {{ item.method }}
     -f {{ item.fs }} -a {{ item.arch }} -v {{ item.version }}
   loop: '{{ poudriere_jails }}'

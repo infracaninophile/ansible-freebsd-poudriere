@@ -1,7 +1,7 @@
 ---
 
 - name: "cert: Create {{ poudriere_ssl_dir }}"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}"
     owner: "{{ poudriere_owner }}"
@@ -10,7 +10,7 @@
   tags: poudriere_ssl_dirs
 
 - name: "cert: Create {{ poudriere_ssl_dir }}/crt"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/crt"
     owner: "{{ poudriere_owner }}"
@@ -19,7 +19,7 @@
   tags: poudriere_ssl_dirs
 
 - name: "cert: Create {{ poudriere_ssl_dir }}/csr"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/csr"
     owner: "{{ poudriere_owner }}"
@@ -28,7 +28,7 @@
   tags: poudriere_ssl_dirs
 
 - name: "cert: Create {{ poudriere_ssl_dir }}/public"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/public"
     owner: "{{ poudriere_owner }}"
@@ -37,7 +37,7 @@
   tags: poudriere_ssl_dirs
 
 - name: "cert: Create {{ poudriere_ssl_dir }}/private"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/private"
     owner: "{{ poudriere_owner }}"
@@ -63,13 +63,13 @@
 
 - name: "cert: Register contents of {{ poudriere_pubkey_path }}"
   when: poudriere_cert_create and not ansible_check_mode
-  command: "cat {{ poudriere_pubkey_path }}"
+  ansible.builtin.command: "cat {{ poudriere_pubkey_path }}"
   register: poudriere_pubkey
   tags: poudriere_pubkey
 
 - name: "cert: Set a fact containing the OpenSSL public key"
   when: poudriere_cert_create and not ansible_check_mode
-  set_fact:
+  ansible.builtin.set_fact:
     poudriere_pubkey: "{{ poudriere_pubkey.stdout }}"
     cacheable: true
   tags: poudriere_pubkey

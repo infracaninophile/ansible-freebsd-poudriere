@@ -1,7 +1,7 @@
 ---
 
 - name: "conf: Create {{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
     owner: "{{ poudriere_owner }}"
@@ -9,7 +9,7 @@
     mode: "{{ poudriere_mode_dir }}"
 
 - name: "conf: Create list of packages in {{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
-  template:
+  ansible.builtin.template:
     src: "poudriere.pkglist.j2"
     dest: "{{ poudriere_pkglist_dir }}_{{ pkg_arch }}/{{ item.pkglist }}"
     owner: "{{ poudriere_owner }}"

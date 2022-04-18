@@ -1,7 +1,7 @@
 ---
 
 - name: "conf: Configure {{ poudriere_conf_file }}"
-  template:
+  ansible.builtin.template:
     src: "poudriere.conf.j2"
     dest: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
@@ -10,7 +10,7 @@
     backup: "{{ poudriere_backup_conf|bool }}"
 
 - name: "conf: Create {{ poudriere_conf['DISTFILES_CACHE'] }}"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ poudriere_conf['DISTFILES_CACHE'] }}"
     owner: "{{ poudriere_owner }}"

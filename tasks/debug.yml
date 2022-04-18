@@ -40,7 +40,7 @@
          bsd_python_version [ {{ bsd_python_version }} ]
          poudriere_pkg_arch [
          {{ poudriere_pkg_arch | to_yaml }} ]
-  debug:
+  ansible.builtin.debug:
     msg: "{{ msg.split('\n') }}"
 
 # EOF
