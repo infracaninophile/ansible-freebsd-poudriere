@@ -2,7 +2,7 @@
 
 - name: "ZFS: create the ZFSes used by poudriere"
   when: poudriere_use_zfs | bool
-  community.general.storage.zfs.zfs:
+  community.general.zfs:
     name: '{{ item.key }}'
     state: present
     extra_zfs_properties:
