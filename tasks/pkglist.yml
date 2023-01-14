@@ -1,6 +1,6 @@
 ---
 
-- name: "conf: Create {{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
+- name: "Conf: create {poudriere_pkglist_dir}_{pkg_arch}"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
@@ -8,14 +8,14 @@
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode_dir }}"
 
-- name: "conf: Create list of packages in {{ poudriere_pkglist_dir }}_{{ pkg_arch }}"
+- name: "Conf: create list of packages in {poudriere_pkglist_dir}_{pkg_arch}"
   ansible.builtin.template:
     src: "poudriere.pkglist.j2"
     dest: "{{ poudriere_pkglist_dir }}_{{ pkg_arch }}/{{ item.pkglist }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
-    backup: "{{ poudriere_backup_conf|bool }}"
+    backup: "{{ poudriere_backup_conf | bool }}"
   loop: "{{ lookup('vars', 'pkg_dict_' + pkg_arch) }}"
 
 # EOF

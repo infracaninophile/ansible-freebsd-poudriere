@@ -1,15 +1,15 @@
 ---
 
-- name: "conf: Configure {{ poudriere_conf_file }}"
+- name: "Conf: configure {poudriere_conf_file}"
   ansible.builtin.template:
     src: "poudriere.conf.j2"
     dest: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
-    backup: "{{ poudriere_backup_conf|bool }}"
+    backup: "{{ poudriere_backup_conf | bool }}"
 
-- name: "conf: Create {{ poudriere_conf['DISTFILES_CACHE'] }}"
+- name: "Conf: create {poudriere_conf['DISTFILES_CACHE']}"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_conf['DISTFILES_CACHE'] }}"
@@ -17,8 +17,8 @@
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode_dir }}"
 
-- name: "conf: Create list of packages"
-  include_tasks: pkglist.yml
+- name: "Conf: create list of packages"
+  ansible.builtin.include_tasks: pkglist.yml
   loop: "{{ poudriere_pkg_arch }}"
   loop_control:
     loop_var: pkg_arch

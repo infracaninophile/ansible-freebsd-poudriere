@@ -1,14 +1,14 @@
 ---
 
 # Note: Review poudriere CUSTOMISATION
-- name: "make: Configure {{ poudriere_conf_dir }}/make.conf"
+- name: "Make: configure {poudriere_conf_dir}/make.conf"
   ansible.builtin.template:
     src: make.conf.j2
     dest: "{{ poudriere_conf_dir }}/make.conf"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
-    backup: "{{ poudriere_backup_conf|bool }}"
+    backup: "{{ poudriere_backup_conf | bool }}"
 
 # EOF
 ...

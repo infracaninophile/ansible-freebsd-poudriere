@@ -1,35 +1,40 @@
 ---
 # tasks freebsd-poudriere
 
-- import_tasks: debug.yml
-  when: poudriere_debug
-  tags: [poudriere_debug, always]
-
-- import_tasks: packages.yml
+- name: Packages
+  ansible.builtin.import_tasks: packages.yml
   tags: poudriere_packages
 
-- import_tasks: cert.yml
+- name: Certificate
+  ansible.builtin.import_tasks: cert.yml
   tags: poudriere_cert
 
-- import_tasks: conf.yml
+- name: Configuration
+  ansible.builtin.import_tasks: conf.yml
   tags: poudriere_config
 
-- import_tasks: make.yml
+- name: Make
+  ansible.builtin.import_tasks: make.yml
   tags: poudriere_make
 
-- import_tasks: zfs.yml
+- name: ZFS
+  ansible.builtin.import_tasks: zfs.yml
   tags: poudriere_zfs
 
-- import_tasks: ufs.yml
+- name: UFS
+  ansible.builtin.import_tasks: ufs.yml
   tags: poudriere_ufs
 
-- import_tasks: ccache.yml
+- name: CCache
+  ansible.builtin.import_tasks: ccache.yml
   tags: poudriere_ccache
 
-- import_tasks: ports.yml
+- name: Ports
+  ansible.builtin.import_tasks: ports.yml
   tags: poudriere_ports
 
-- import_tasks: jails.yml
+- name: Jails
+  ansible.builtin.import_tasks: jails.yml
   tags: poudriere_jails
 
 # EOF

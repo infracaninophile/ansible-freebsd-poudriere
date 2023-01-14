@@ -1,12 +1,12 @@
 ---
 
-- name: "packages: Install poudriere packages"
-  pkgng:
+- name: "Packages: Install poudriere packages"
+  community.general.packaging.os.pkgng:
     name: "{{ poudriere_packages }}"
 
-- name: "packages: Install packages to create certificate"
+- name: "Packages: Install packages to create certificate"
   when: poudriere_cert_create
-  pkgng:
+  community.general.packaging.os.pkgng:
     name: "{{ poudriere_packages_cert }}"
 
 # EOF

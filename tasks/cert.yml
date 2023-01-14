@@ -1,6 +1,6 @@
 ---
 
-- name: "cert: Create {{ poudriere_ssl_dir }}"
+- name: "Cert: create {poudriere_ssl_dir}"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}"
@@ -9,7 +9,7 @@
     mode: 0755
   tags: poudriere_ssl_dirs
 
-- name: "cert: Create {{ poudriere_ssl_dir }}/crt"
+- name: "Cert: create {poudriere_ssl_dir}/crt"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/crt"
@@ -18,7 +18,7 @@
     mode: "{{ poudriere_ssl_dir_mode }}"
   tags: poudriere_ssl_dirs
 
-- name: "cert: Create {{ poudriere_ssl_dir }}/csr"
+- name: "Cert: create {poudriere_ssl_dir}/csr"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/csr"
@@ -27,7 +27,7 @@
     mode: "{{ poudriere_ssl_dir_mode }}"
   tags: poudriere_ssl_dirs
 
-- name: "cert: Create {{ poudriere_ssl_dir }}/public"
+- name: "Cert: create {poudriere_ssl_dir}/public"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/public"
@@ -36,7 +36,7 @@
     mode: "{{ poudriere_ssl_dir_mode }}"
   tags: poudriere_ssl_dirs
 
-- name: "cert: Create {{ poudriere_ssl_dir }}/private"
+- name: "Cert: create {poudriere_ssl_dir}/private"
   ansible.builtin.file:
     state: directory
     path: "{{ poudriere_ssl_dir }}/private"
@@ -45,46 +45,46 @@
     mode: "{{ poudriere_ssl_private_dir_mode }}"
   tags: poudriere_ssl_dirs
 
-- name: "cert: Generate an OpenSSL private key (default 4096 bits, RSA)"
+- name: "Cert: generate an OpenSSL private key (default 4096 bits, RSA)"
   when: poudriere_cert_create and not ansible_check_mode
-  openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_ssl_private_key_mode }}"
   tags: poudriere_crt
 
-- name: "cert: Generate an OpenSSL public key"
+- name: "Cert: generate an OpenSSL public key"
   when: poudriere_cert_create and not ansible_check_mode
-  openssl_publickey:
+  community.crypto.openssl_publickey:
     path: "{{ poudriere_pubkey_path }}"
     privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
   tags: poudriere_pubkey
 
-- name: "cert: Register contents of {{ poudriere_pubkey_path }}"
+- name: "Cert: register contents of {poudriere_pubkey_path}"
   when: poudriere_cert_create and not ansible_check_mode
   ansible.builtin.command: "cat {{ poudriere_pubkey_path }}"
   register: poudriere_pubkey
   tags: poudriere_pubkey
 
-- name: "cert: Set a fact containing the OpenSSL public key"
+- name: "Cert: set a fact containing the OpenSSL public key"
   when: poudriere_cert_create and not ansible_check_mode
   ansible.builtin.set_fact:
     poudriere_pubkey: "{{ poudriere_pubkey.stdout }}"
     cacheable: true
   tags: poudriere_pubkey
 
-- name: "cert: Generate an OpenSSL Certificate Signing Request"
+- name: "Cert: generate an OpenSSL certificate signing request"
   when: poudriere_cert_create and not ansible_check_mode
-  openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ poudriere_ssl_dir }}/csr/poudriere.csr"
     privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     common_name: "{{ poudriere_cert_cn }}"
   tags: poudriere_crt
 
-- name: "cert: Generate a Self Signed OpenSSL certificate"
+- name: "Cert: generate a self signed OpenSSL certificate"
   when: poudriere_cert_create and not ansible_check_mode
-  openssl_certificate:
+  community.crypto.x509_certificate:
     path: "{{ poudriere_cert_path }}"
     privatekey_path: "{{ poudriere_conf['PKG_REPO_SIGNING_KEY'] }}"
     csr_path: "{{ poudriere_ssl_dir }}/csr/poudriere.csr"

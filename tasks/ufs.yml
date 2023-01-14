@@ -1,6 +1,6 @@
 ---
 
-- name: Create directories used by poudriere
+- name: "UFS: create directories used by poudriere"
   when: not poudriere_use_zfs | bool
   ansible.builtin.file:
     dest: '{{ item }}'
