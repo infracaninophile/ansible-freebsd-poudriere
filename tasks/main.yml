@@ -27,6 +27,7 @@
 
 - name: CCache
   ansible.builtin.import_tasks: ccache.yml
+  when: poudriere_conf.CCACHE_DIR
   tags: poudriere_ccache
 
 - name: Ports
