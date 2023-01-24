@@ -21,7 +21,7 @@ poudriere_mode: 0644
 poudriere_mode_dir: 0755
 # ssl
 poudriere_cert_create: true
-poudriere_ssl_dir: /usr/local/etc/ssl
+poudriere_ssl_dir: "{{ poudriere_conf_dir }}/tls"
 poudriere_ssl_dir_mode: 0755
 poudriere_ssl_private_dir_mode: 0700
 poudriere_ssl_private_key_mode: 0600
@@ -45,7 +45,6 @@ poudriere_conf:
   USE_PORTLINT: "no"
   USE_TMPFS: "yes"
   DISTFILES_CACHE: /usr/ports/distfiles
-  SVN_HOST: svn.FreeBSD.org
   CHECK_CHANGED_OPTIONS: verbose
   CHECK_CHANGED_DEPS: "yes"
   PKG_REPO_SIGNING_KEY: "{{ poudriere_ssl_dir }}/private/poudriere.pem"
@@ -60,22 +59,21 @@ poudriere_ccache_conf:
 # {{ poudriere_conf_dir }}/make.conf
 poudriere_make_conf: []
 
-poudriere_pkglist_dir: "{{ poudriere_conf_dir }}/pkglist"
-poudriere_pkg_arch:
-  - amd64
-pkg_dict_amd64:
-  - pkglist: packages
-    packages:
-      - security/ca_root_nss
-      - devel/ccache
-      - devel/git
-      - www/nginx
-      - security/pam_ssh_agent_auth
-      - ports-mgmt/pkg
-      - ports-mgmt/poudriere
-      - security/py-openssl
-      - lang/python
-      - security/sudo
+# poudriere_pkglists:
+#  - name: "{{ poudriere_conf_dir }}/packagelist"
+#    packages:
+#      - security/ca_root_nss
+#      - devel/ccache
+#      - devel/git
+#      - www/nginx
+#      - security/pam_ssh_agent_auth
+#      - ports-mgmt/pkg
+#      - ports-mgmt/poudriere
+#      - security/py-openssl
+#      - lang/python
+#      - security/sudo
+
+poudriere_pkglists: []
 
 poudriere_zfs:
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}":
@@ -84,7 +82,7 @@ poudriere_zfs:
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/jails":
     'poudriere:type': jails
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/ports":
-    'poudriere:type': jails
+    'poudriere:type': ports
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/data":
     'poudriere:type': data
 

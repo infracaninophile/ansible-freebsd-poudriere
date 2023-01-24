@@ -2,7 +2,7 @@
 
 - name: "Conf: configure {poudriere_conf_file}"
   ansible.builtin.template:
-    src: "poudriere.conf.j2"
+    src: poudriere.conf.j2
     dest: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
@@ -17,11 +17,23 @@
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode_dir }}"
 
-- name: "Conf: create list of packages"
-  ansible.builtin.include_tasks: pkglist.yml
-  loop: "{{ poudriere_pkg_arch }}"
-  loop_control:
-    loop_var: pkg_arch
+- name: "Conf: create directories for pkglists, as required"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item.name | dirname }}"
+    owner: "{{ poudriere_owner }}"
+    group: "{{ poudriere_group }}"
+    mode: "{{ poudriere_mode_dir }}"
+  loop: "{{ poudriere_pkglists }}"
 
-# EOF
+- name: "Conf: create lists of packages"
+  ansible.builtin.template:
+    src: poudriere.pkglist.j2
+    dest: "{{ item.name }}"
+    owner: "{{ poudriere_owner }}"
+    group: "{{ poudriere_group }}"
+    mode: "{{ poudriere_mode }}"
+    backup: "{{ poudriere_backup_conf | bool }}"
+  loop: "{{ poudriere_pkglists }}"
+
 ...
