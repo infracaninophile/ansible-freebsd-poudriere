@@ -49,9 +49,9 @@ poudriere_conf:
   CHECK_CHANGED_DEPS: "yes"
   PKG_REPO_SIGNING_KEY: "{{ poudriere_ssl_dir }}/private/poudriere.pem"
   CCACHE_DIR: /var/cache/ccache
-  BUILD_AS_NON_ROOT: true
-  CCACHE_DIR_NON_ROOT_SAFE: true
-  URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/"
+  BUILD_AS_NON_ROOT: "yes"
+  CCACHE_DIR_NON_ROOT_SAFE: "yes"
+  URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/data"
 
 poudriere_ccache_conf:
   max_size: 8G

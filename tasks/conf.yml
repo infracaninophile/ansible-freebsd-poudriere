@@ -1,13 +1,16 @@
 ---
 
 - name: "Conf: configure {poudriere_conf_file}"
-  ansible.builtin.template:
-    src: poudriere.conf.j2
-    dest: "{{ poudriere_conf_file }}"
+  ansible.builtin.lineinfile:
+    state: present
+    line: "{{ item.key }}={{ item.value | quote }}"
+    regexp: "^#?{{ item.key }}"
+    path: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
     backup: "{{ poudriere_backup_conf | bool }}"
+  loop: "{{ poudriere_conf | dict2items }}"
 
 - name: "Conf: create {poudriere_conf['DISTFILES_CACHE']}"
   ansible.builtin.file:
