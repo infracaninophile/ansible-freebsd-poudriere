@@ -7,6 +7,7 @@
 
 - name: Certificate
   ansible.builtin.import_tasks: cert.yml
+  when: "'PKG_REPO_SIGNING_KEY' in poudriere_conf"
   tags: poudriere_cert
 
 - name: Configuration
@@ -27,7 +28,7 @@
 
 - name: CCache
   ansible.builtin.import_tasks: ccache.yml
-  when: poudriere_conf.CCACHE_DIR
+  when: "'CCACHE_DIR' in poudriere_conf"
   tags: poudriere_ccache
 
 - name: Ports

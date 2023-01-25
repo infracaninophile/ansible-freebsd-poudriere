@@ -1,5 +1,11 @@
 ---
 
+
+- name: "Packages: Install packages to create certificate"
+  when: poudriere_cert_create
+  community.general.packaging.os.pkgng:
+    name: "{{ poudriere_packages_cert }}"
+
 - name: "Cert: create {poudriere_ssl_dir}"
   ansible.builtin.file:
     state: directory

@@ -4,10 +4,4 @@
   community.general.packaging.os.pkgng:
     name: "{{ poudriere_packages }}"
 
-- name: "Packages: Install packages to create certificate"
-  when: poudriere_cert_create
-  community.general.packaging.os.pkgng:
-    name: "{{ poudriere_packages_cert }}"
-
-# EOF
 ...
