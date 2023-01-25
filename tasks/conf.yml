@@ -20,20 +20,20 @@
 - name: "Conf: create directories for pkglists, as required"
   ansible.builtin.file:
     state: directory
-    path: "{{ item.name | dirname }}"
+    path: "{{ poudriere_conf_dir }}/{{ item | dirname }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode_dir }}"
-  loop: "{{ poudriere_pkglists }}"
+  loop: "{{ poudriere_pkglist_files }}"
 
-- name: "Conf: create lists of packages"
-  ansible.builtin.template:
-    src: poudriere.pkglist.j2
-    dest: "{{ item.name }}"
+- name: "Conf: install package list files"
+  ansible.builtin.copy:
+    src: "{{ inventory_hostname }}/{{ item | basename }}"
+    dest: "{{ item }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
     backup: "{{ poudriere_backup_conf | bool }}"
-  loop: "{{ poudriere_pkglists }}"
+  loop: "{{ poudriere_pkglist_files }}"
 
 ...

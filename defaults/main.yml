@@ -56,24 +56,19 @@ poudriere_conf:
 poudriere_ccache_conf:
   max_size: 8G
 
-# {{ poudriere_conf_dir }}/make.conf
-poudriere_make_conf: []
+# The idea is that you add customized per-host make.conf variants in
+# your playbooks directory structure -- see
+# https://stackoverflow.com/questions/32830428/where-should-i-be-organizing-host-specific-files-templates
+# Override the poudriere_make_conf_files list with your customized
+# file names.
 
-# poudriere_pkglists:
-#  - name: "{{ poudriere_conf_dir }}/packagelist"
-#    packages:
-#      - security/ca_root_nss
-#      - devel/ccache
-#      - devel/git
-#      - www/nginx
-#      - security/pam_ssh_agent_auth
-#      - ports-mgmt/pkg
-#      - ports-mgmt/poudriere
-#      - security/py-openssl
-#      - lang/python
-#      - security/sudo
+poudriere_make_conf_files: []
 
-poudriere_pkglists: []
+# Similarly to make.conf above, override this list to add per-host
+# package lists files.  You can install into subdirectories of
+# poudriere_conf_dir
+
+poudriere_pkglist_files: []
 
 poudriere_zfs:
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}":
