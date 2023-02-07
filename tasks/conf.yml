@@ -32,7 +32,7 @@
 - name: "Conf: install package list files"
   ansible.builtin.copy:
     src: "{{ inventory_hostname }}/{{ item | basename }}"
-    dest: "{{ item }}"
+    dest: "{{ poudriere_conf_dir }}/{{ item }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
     mode: "{{ poudriere_mode }}"
