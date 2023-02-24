@@ -10,6 +10,7 @@
 
 - name: Set up ports tree(s) for poudriere
   when: item.name not in ports_trees.stdout_lines
+  changed_when: item.name not in ports_trees.stdout_lines
   ansible.builtin.command: >
     poudriere ports -c  -p {{ item.name }} -m {{ item.method }}
     {% if 'mountpoint' in item %}-M {{ item.mountpoint }}{% endif %}
