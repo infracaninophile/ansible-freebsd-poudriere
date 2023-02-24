@@ -1,10 +1,9 @@
 ---
-
 - name: "Conf: configure {poudriere_conf_file}"
   ansible.builtin.lineinfile:
     state: present
     line: "{{ item.key }}={{ item.value | quote }}"
-    regexp: "^#?{{ item.key }}="
+    regexp: ^#?{{ item.key }}=
     path: "{{ poudriere_conf_file }}"
     owner: "{{ poudriere_owner }}"
     group: "{{ poudriere_group }}"
@@ -38,5 +37,3 @@
     mode: "{{ poudriere_mode }}"
     backup: "{{ poudriere_backup_conf | bool }}"
   loop: "{{ poudriere_pkglist_files }}"
-
-...

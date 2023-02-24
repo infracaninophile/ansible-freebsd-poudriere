@@ -1,8 +1,7 @@
 ---
-
 - name: Create {{ poudriere_conf.CCACHE_DIR }}
   ansible.builtin.file:
-    name: '{{ poudriere_conf.CCACHE_DIR }}'
+    name: "{{ poudriere_conf.CCACHE_DIR }}"
     state: directory
     owner: root
     group: wheel
@@ -10,10 +9,10 @@
 
 - name: Create subdirectories of {{ poudriere_conf.CCACHE_DIR }}
   ansible.builtin.file:
-    name: '{{ poudriere_conf.CCACHE_DIR }}/{{ item }}'
+    name: "{{ poudriere_conf.CCACHE_DIR }}/{{ item }}"
     state: directory
-    owner: '{{ poudriere_ccache_user }}'
-    group: '{{ poudriere_ccache_group }}'
+    owner: "{{ poudriere_ccache_user }}"
+    group: "{{ poudriere_ccache_group }}"
     mode: "0755"
   loop:
     - 0
@@ -37,9 +36,7 @@
 - name: Create ccache.conf
   ansible.builtin.template:
     src: ccache.conf.j2
-    dest: '{{ poudriere_conf.CCACHE_DIR }}/ccache.conf'
+    dest: "{{ poudriere_conf.CCACHE_DIR }}/ccache.conf"
     owner: root
     group: wheel
     mode: "0644"
-
-...

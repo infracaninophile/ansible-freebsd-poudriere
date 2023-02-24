@@ -51,7 +51,7 @@ poudriere_conf:
   CCACHE_DIR: /var/cache/ccache
   BUILD_AS_NON_ROOT: "yes"
   CCACHE_DIR_NON_ROOT_SAFE: "yes"
-  URL_BASE: "http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/data"
+  URL_BASE: http://{{ ansible_default_ipv4.address | default('127.0.0.1') }}/data
 
 poudriere_ccache_conf:
   max_size: 8G
@@ -63,33 +63,27 @@ poudriere_ccache_conf:
 # file names.
 
 poudriere_make_conf_files: []
-
 # Similarly to make.conf above, override this list to add per-host
 # package lists files.  You can install into subdirectories of
 # poudriere_conf_dir
 
 poudriere_pkglist_files: []
-
 poudriere_zfs:
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}":
-    mountpoint: '{{ poudriere_basefs }}'
-    'poudriere:type': root
+    mountpoint: "{{ poudriere_basefs }}"
+    poudriere:type: root
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/jails":
-    'poudriere:type': jails
+    poudriere:type: jails
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/ports":
-    'poudriere:type': ports
+    poudriere:type: ports
   "{{ poudriere_conf['ZPOOL'] }}{{ poudriere_conf['ZROOTFS'] }}/data":
-    'poudriere:type': data
+    poudriere:type: data
 
 poudriere_ufs:
-  - '{{ poudriere_basefs }}'
-  - '{{ poudriere_basefs }}/jails'
-  - '{{ poudriere_basefs }}/ports'
-  - '{{ poudriere_basefs }}/data'
+  - "{{ poudriere_basefs }}"
+  - "{{ poudriere_basefs }}/jails"
+  - "{{ poudriere_basefs }}/ports"
+  - "{{ poudriere_basefs }}/data"
 
 poudriere_ports: []
-
 poudriere_jails: []
-
-# EOF
-...

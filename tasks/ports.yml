@@ -1,7 +1,6 @@
 ---
-
 - name: Find existing ports trees
-  ansible.builtin.shell: 'poudriere ports -l -q | cut -f 1 -w 2>/dev/null'
+  ansible.builtin.shell: poudriere ports -l -q | cut -f 1 -w 2>/dev/null
   args:
     executable: /bin/sh
   ignore_errors: true
@@ -16,6 +15,4 @@
     {% if 'mountpoint' in item %}-M {{ item.mountpoint }}{% endif %}
     {% if 'branch' in item %}-N {{ item.branch }}{% endif %}
     {% if 'fs' in item %}-f {{ item.fs }}{% endif %}
-  loop: '{{ poudriere_ports }}'
-
-...
+  loop: "{{ poudriere_ports }}"

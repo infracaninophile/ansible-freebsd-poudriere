@@ -1,13 +1,9 @@
 ---
-
 - name: "ZFS: create the ZFSes used by poudriere"
   when: poudriere_use_zfs | bool
   community.general.zfs:
-    name: '{{ item.key }}'
+    name: "{{ item.key }}"
     state: present
-    extra_zfs_properties:
-      '{{ item.value }}'
-  loop: '{{ poudriere_zfs | dict2items }}'
+    extra_zfs_properties: "{{ item.value }}"
+  loop: "{{ poudriere_zfs | dict2items }}"
   tags: poudriere_zfs
-
-...

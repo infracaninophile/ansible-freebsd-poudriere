@@ -1,12 +1,9 @@
 ---
-
 - name: "UFS: create directories used by poudriere"
   when: not poudriere_use_zfs | bool
   ansible.builtin.file:
-    dest: '{{ item }}'
+    dest: "{{ item }}"
     mode: "0755"
     state: directory
-  loop: '{{ poudriere_ufs }}'
+  loop: "{{ poudriere_ufs }}"
   tags: poudriere_ufs
-
-...

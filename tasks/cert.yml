@@ -1,6 +1,4 @@
 ---
-
-
 - name: "Packages: Install packages to create certificate"
   when: poudriere_cert_create
   community.general.packaging.os.pkgng:
@@ -69,7 +67,7 @@
 
 - name: "Cert: register contents of {poudriere_pubkey_path}"
   when: poudriere_cert_create and not ansible_check_mode
-  ansible.builtin.command: "cat {{ poudriere_pubkey_path }}"
+  ansible.builtin.command: cat {{ poudriere_pubkey_path }}
   register: poudriere_pubkey
   tags: poudriere_pubkey
 
@@ -98,4 +96,3 @@
   tags: poudriere_crt
 
 # EOF
-...

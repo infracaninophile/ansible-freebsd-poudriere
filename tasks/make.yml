@@ -1,5 +1,4 @@
 ---
-
 # Note: Review poudriere CUSTOMISATION
 - name: "Make: install {poudriere_conf_dir}/make.conf files"
   ansible.builtin.copy:
@@ -10,5 +9,3 @@
     mode: "{{ poudriere_mode }}"
     backup: "{{ poudriere_backup_conf | bool }}"
   loop: "{{ poudriere_make_conf_files }}"
-
-...

@@ -1,7 +1,4 @@
 ---
-
 - name: "Packages: Install poudriere packages"
   community.general.packaging.os.pkgng:
     name: "{{ poudriere_packages }}"
-
-...
