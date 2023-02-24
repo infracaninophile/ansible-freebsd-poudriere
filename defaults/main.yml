@@ -17,14 +17,14 @@ poudriere_packages_cert:
 # owner, group, mode
 poudriere_owner: root
 poudriere_group: wheel
-poudriere_mode: 0644
-poudriere_mode_dir: 0755
+poudriere_mode: "0644"
+poudriere_mode_dir: "0755"
 # ssl
 poudriere_cert_create: true
 poudriere_ssl_dir: "{{ poudriere_conf_dir }}/tls"
-poudriere_ssl_dir_mode: 0755
-poudriere_ssl_private_dir_mode: 0700
-poudriere_ssl_private_key_mode: 0600
+poudriere_ssl_dir_mode: "0755"
+poudriere_ssl_private_dir_mode: "0700"
+poudriere_ssl_private_key_mode: "0600"
 poudriere_cert_cn: "{{ ansible_fqdn }}"
 poudriere_cert_path: "{{ poudriere_ssl_dir }}/crt/poudriere.crt"
 poudriere_pubkey_path: "{{ poudriere_ssl_dir }}/public/poudriere.public.pem"
