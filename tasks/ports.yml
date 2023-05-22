@@ -6,11 +6,11 @@
   ignore_errors: true
   check_mode: false
   changed_when: false
-  register: ports_trees
+  register: poudriere_ports_trees
 
 - name: Set up ports tree(s) for poudriere
-  when: item.name not in ports_trees.stdout_lines
-  changed_when: item.name not in ports_trees.stdout_lines
+  when: item.name not in poudriere_ports_trees.stdout_lines
+  changed_when: item.name not in poudriere_ports_trees.stdout_lines
   ansible.builtin.command: >
     poudriere ports -c  -p {{ item.name }} -m {{ item.method }}
     {% if 'mountpoint' in item %}-M {{ item.mountpoint }}{% endif %}

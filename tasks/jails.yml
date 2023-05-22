@@ -6,11 +6,11 @@
   ignore_errors: true
   changed_when: false
   check_mode: false
-  register: jails
+  register: poudriere_existing_jails
 
 - name: Set up jail(s) for poudriere
-  when: item.name not in jails.stdout_lines
-  changed_when: item.name not in jails.stdout_lines
+  when: item.name not in poudriere_existing_jails.stdout_lines
+  changed_when: item.name not in poudriere_existing_jails.stdout_lines
   ansible.builtin.command: >
     poudriere jail -c -j {{ item.name }} -m {{ item.method }}
     -f {{ item.fs }} -a {{ item.arch }} -v {{ item.version }}
