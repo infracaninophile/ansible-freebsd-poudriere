@@ -1,4 +1,4 @@
 ---
 - name: "Packages: Install poudriere packages"
-  community.general.pkgng:
+  ansible.builtin.package:
     name: "{{ poudriere_packages }}"

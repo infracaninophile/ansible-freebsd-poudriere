@@ -1,6 +1,7 @@
 ---
-- hosts: localhost
+- name: Testing poudriere role
+  hosts: localhost
   remote_user: root
   roles:
-    - ansible-freebsd-poudriere
+    - poudriere
 ...
