@@ -18,10 +18,6 @@
   ansible.builtin.import_tasks: make.yml
   tags: poudriere_make
 
-- name: ZFS
-  ansible.builtin.import_tasks: zfs.yml
-  tags: poudriere_zfs
-
 - name: UFS
   ansible.builtin.import_tasks: ufs.yml
   tags: poudriere_ufs
@@ -35,6 +31,10 @@
   ansible.builtin.import_tasks: ports.yml
   tags: poudriere_ports
 
+- name: ZFS
+  ansible.builtin.import_tasks: zfs.yml
+  tags: poudriere_zfs
+  
 - name: Jails
   ansible.builtin.import_tasks: jails.yml
   tags: poudriere_jails
