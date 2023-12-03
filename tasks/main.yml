@@ -31,12 +31,10 @@
   ansible.builtin.import_tasks: ports.yml
   tags: poudriere_ports
 
-- name: ZFS
-  ansible.builtin.import_tasks: zfs.yml
-  tags: poudriere_zfs
-  
 - name: Jails
   ansible.builtin.import_tasks: jails.yml
   tags: poudriere_jails
 
-# EOF
+- name: ZFS
+  ansible.builtin.import_tasks: zfs.yml
+  tags: poudriere_zfs

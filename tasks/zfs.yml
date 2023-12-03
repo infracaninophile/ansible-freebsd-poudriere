@@ -1,5 +1,5 @@
 ---
-- name: "ZFS: create the ZFSes used by poudriere"
+- name: "ZFS: update properties in the ZFSes used by poudriere"
   when: poudriere_use_zfs | bool
   community.general.zfs:
     name: "{{ item.key }}"
