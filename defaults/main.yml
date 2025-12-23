@@ -11,8 +11,9 @@ poudriere_packages:
   - poudriere
   - ccache
   - git
+
 poudriere_packages_cert:
-  - py37-openssl
+  - py312-openssl
 
 # owner, group, mode
 poudriere_owner: root
